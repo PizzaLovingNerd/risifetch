@@ -14,9 +14,9 @@ fn main() {
     ascii_tree = format!(
 
         "   {yellow}                               .o        {reset}
-            {yellow}                             °O@@@       {reset}
-            {cyan}     RRRRRRRRRRRRRRRR    {yellow}°o@@@@@@°       {reset}
-            {cyan}     RRRRRRRRRRRRRRRRR. {yellow}O@@@@@@@@#       {reset}
+            {yellow}                            °O@@@        {reset}
+            {cyan}     RRRRRRRRRRRRRRRR    {yellow}°o@@@@@@        {reset}
+            {cyan}     RRRRRRRRRRRRRRRRR. {yellow}O@@@@@@@@°       {reset}
             {cyan}     RRRR         {cyan}RRRR {yellow}*@@@@@@@@@#       {reset}
             {cyan}     RRRR       {yellow}.** {cyan}RRR {yellow}*@@@@@@@@@       {reset}
             {cyan}     RRRR    {yellow}.*@@@@° {cyan}RRR {yellow}@@@@@@@@@@      {reset}
@@ -29,7 +29,7 @@ fn main() {
             {cyan}     RRRR {yellow}o#@@@@@@@ {cyan}RRRR {yellow}O@@@@@@@@@@@@.   {reset}
             {cyan}     RRRR      {yellow}<@@@@ {cyan}RRRR {yellow}.o@@@@@@@@@@O   {reset}
             {cyan}     RRRR            {cyan}RRRR {yellow}°oO@@@@@@@@@@   {reset}
-            {cyan}     ^^^^            {cyan}^^^^    {yellow}.°*O#@@@@@@   {reset}
+            {cyan}     RRRR            {cyan}RRRR    {yellow}.°*O#@@@@@@   {reset}
             {yellow}                                  .@@@@@.   {reset}
             {yellow}                                      ***   {reset}
         ",

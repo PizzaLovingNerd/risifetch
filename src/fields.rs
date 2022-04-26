@@ -200,7 +200,7 @@ pub fn format_battery(battery: systemstat::BatteryLife) -> String {
     format_data(
         "battery",
         &format!("{percent}%, {hours}h {minutes}m remaining",
-                 percent = battery.remaining_capacity * 100.0,
+                 percent = (battery.remaining_capacity * 100.0).trunc(),
                  hours = battery.remaining_time.as_secs() / 3600,
                  minutes = battery.remaining_time.as_secs() % 60))
 }
