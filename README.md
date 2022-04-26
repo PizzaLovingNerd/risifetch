@@ -14,7 +14,7 @@ Compiling is currently the only option to run `risifetch` for **BSD/macOS** syst
 To compile and install treefetch manually, you first need to [install the Rust
 compiler](https://www.rust-lang.org/tools/install).
 
-- `cargo install --git https://github.com/angelofallars/treefetch`
+- `cargo install --git https://github.com/risiOS/risifetch`
 
 ## Usage
 
