@@ -144,9 +144,9 @@ pub fn get_kernel(show_kern_name: bool) -> Result<String, String> {
     Ok(format_data(
         "kernel",
         &if show_kern_name {
-            format!("{}/{} {}", uname.sysname(), uname.machine(), uname.release())
+            format!("{}/{}", uname.sysname(), uname.machine())
         } else {
-            format!("{} {}", uname.release(), uname.machine())
+            format!("{}", uname.release())
         }))
 }
 
