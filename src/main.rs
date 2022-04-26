@@ -9,20 +9,31 @@ fn main() {
 
     let args: Vec<String> = env::args().collect();
     let mut show_kern_name = false;
-    let mut is_christmas = false;
-    let mut ascii_tree: String;
+    let ascii_tree: String;
 
     ascii_tree = format!(
-        "{green}     /\\*\\       {reset}
-        {green}    /\\O\\*\\      {reset}
-        {green}   /*/\\/\\/\\     {reset}
-        {green}  /\\O\\/\\*\\/\\    {reset}
-        {green} /\\*\\/\\*\\/\\/\\   {reset}
-        {green} |O\\/\\/*/\\/O|   {reset}
-        {yellow}      ||        {reset}
-        {yellow}      ||        {reset}
+
+        "   {yellow}                               .v        {reset}
+            {yellow}                             °O@@@       {reset}
+            {cyan}     RRRRRRRRRRRRRRRR    {yellow}°o@@@@@@°       {reset}
+            {cyan}     RRRRRRRRRRRRRRRRR. {yellow}O@@@@@@@@#       {reset}
+            {cyan}     RRRR         {cyan}RRRR {yellow}*@@@@@@@@@#       {reset}
+            {cyan}     RRRR       {yellow}.** {cyan}RRR {yellow}*@@@@@@@@@#      {reset}
+            {cyan}     RRRR    {yellow}.*@@@@° {cyan}RRR {yellow}@@@@@@@@@@      {reset}
+            {cyan}     RRRR {yellow}°o@@@@@@@ {cyan}RRR {yellow}*@@@@@@@@@@      {reset}
+            {cyan}     RRRR {yellow}#@@@@@@@ {cyan}RRR {yellow}*.@@@@@@@@@@.     {reset}
+            {yellow}  *@ {cyan}RRRRRRRRRRRRRRRR {yellow}*@@@@@@@@@@@@@     {reset}
+            {yellow}*o@@ {cyan}RRRRRRRRRRRRRRRR {yellow}.#@@@@@@@@@@@@@.   {reset}
+            {yellow} #@@ {cyan}RRRR {yellow}@@@@@  {cyan}RRRR {yellow}*@@@@@@@@@@@@@@o   {reset}
+            {yellow}   @ {cyan}RRRR {yellow}@@@@@@@@ {cyan}RRRR {yellow}#@@@@@@@@@@@@@   {reset}
+            {cyan}     RRRR {yellow}o#@@@@@@@ {cyan}RRRR {yellow}O@@@@@@@@@@@@.  {reset}
+            {cyan}     RRRR      {yellow}<@@@@ {cyan}RRRR {yellow}.o@@@@@@@@@@O  {reset}
+            {cyan}     RRRR            {cyan}RRRR {yellow}°oO@@@@@@@@@@  {reset}
+            {cyan}     ^^^^            {cyan}^^^^    {yellow}.°*O#@@@@@@ {reset}
+            {yellow}                                  .@@@@@.{reset}
+            {yellow}                                      ***{reset}
         ",
-        green = colors::green,
+        cyan = colors::cyan,
         yellow = colors::yellow,
         reset = colors::reset,
     );
@@ -36,53 +47,6 @@ fn main() {
         match arg {
             "--help" | "-h" => {
                 help_message()
-            }
-
-            "--bonsai" | "-b" => {
-                ascii_tree = format!(
-                    "{green} {bold}             &               {reset}
-                    {green}          && & &&             {reset}
-                    {green}         &{yellow}_& & _/{green}&            {reset}
-                    {yellow}{bold}           /~\\                {reset}
-                    {green} &  & &{yellow}     /|                {reset}
-                    {green} & {yellow}{bold}_&{reset}{green}&{yellow}   _\\_/|   {green}             {reset}
-                    {green}&& {yellow}{bold}&{reset}{green}&&{yellow}_/    |\\     {green} && &      {reset}
-                    {green}  &&{yellow}_|/{green}{bold} &{reset}{yellow}  \\//~\\{green}{bold}   &&{reset}{yellow} &&{green}&     {reset}
-                    {yellow}            |/\\__/{green}& &{yellow}_/_{green}&&    {reset}
-                    {gray}        {bold}:{reset}{green}____{yellow}./~\\.{green}____{gray}{bold}:       {reset}
-                    {gray}{bold}         \\___________/        {reset}
-                    {gray}{bold}          (_)     (_)            {reset}
-                    ",
-                    gray = colors::gray,
-                    green = colors::green,
-                    yellow = colors::yellow,
-                    reset = colors::reset,
-                    bold = colors::bold,
-                );
-                break;
-            }
-
-            "--xmas" | "-x" => {
-                ascii_tree = format!(
-                    "{bright_yellow}{bold}      ★         {reset}
-                    {green}     /\\{red}{bold}o{green}\\       {reset}
-                    {green}    /\\{red}{bold}o{green}\\*\\      {reset}
-                    {green}   /{red}{bold}o{green}/\\/\\{blue}{bold}o{green}\\     {reset}
-                    {green}  /\\O\\/\\{red}{bold}o{green}\\/{red}{bold}o{green}    {reset}
-                    {green} /{blue}{bold}o{green}*{red}{bold}o{green}/{blue}{bold}o{green}*\\/{red}{bold}o{green}/\\   {reset}
-                    {green} |O\\/\\/*/{red}{bold}o{green}/O|   {reset}
-                    {yellow}      ||        {reset}
-                    ",
-                    red = colors::red,
-                    green = colors::green,
-                    blue = colors::blue,
-                    yellow = colors::yellow,
-                    bright_yellow = "\x1b[93m",
-                    bold = colors::bold,
-                    reset = colors::reset,
-                );
-                is_christmas = true;
-                break;
             }
 
             "--kernel-name" | "-k" => {
@@ -100,8 +64,10 @@ fn main() {
     let stat = systemstat::System::new();
 
     let mut data_list: Vec<String> = Vec::new();
+    data_list.push(String::from(""));
+    data_list.push(String::from(""));
 
-    if let Ok(value) = fields::get_user_host_name(is_christmas) {
+    if let Ok(value) = fields::get_user_host_name() {
             data_list.push(value.0);
             data_list.push(value.1);
     };
@@ -141,36 +107,23 @@ fn main() {
         data_list.push(fields::format_battery(value));
     };
 
-    print_left_to_right(ascii_tree, data_list, is_christmas);
+    print_left_to_right(ascii_tree, data_list);
 }
 
 // Print two vectors of strings side to side
-fn print_left_to_right(left: Vec<String>, right: Vec<String>,
-                       is_christmas: bool) {
+fn print_left_to_right(left: Vec<String>, right: Vec<String>) {
     let left_len = left.len();
     let right_len = right.len();
     let max_len = if left_len > right_len {left_len} else {right_len};
 
     for i in 0..max_len {
         if i < left_len {
-            print!("{}", left[i]);
+            print!(" {}", left[i]);
         }
-        if i < right_len {
-
-            // Red square if Christmas mode
-            if is_christmas {
-                print!("{}", right[i]
-                       .replace("▪",
-                                &format!("{}▪{}",
-                                         colors::red,
-                                         colors::green)));
-            } else {
-                print!("{}", right[i]);
-            }
+        if i < right_len{
+            print!(" {}", right[i]);
         }
-
-        // Print a newline
-        println!();
+        println!()
     }
 }
 
@@ -194,24 +147,22 @@ fn split_by_newline(ascii_art: String) -> Vec<String> {
 fn help_message() {
     let version = env!("CARGO_PKG_VERSION");
     println!("Usage:");
-    println!("  {bold}{green}treefetch{reset} [options]",
-            green = colors::green,
+    println!("  {bold}{cyan}risifetch{reset} [options]",
+            cyan = colors::cyan,
             reset = colors::reset,
             bold = colors::bold,
             );
     println!();
     println!("OPTIONS");
-    println!("  -b, --bonsai   Show a bonsai tree");
-    println!("  -x, --xmas     Show a Christmas tree");
     println!("  -h, --help     Display this help message");
     println!();
-    println!("treefetch {}", version);
-    println!("Report bugs to https://github.com/angelofallars/treefetch/issues");
+    println!("risifetch {}", version);
+    println!("Report bugs to https://github.com/risiOS/risifetch/issues");
     process::exit(1)
 }
 
 fn invalid_option(option: String) {
     println!("Unrecognized option '{}'", option);
-    println!("Try 'treefetch --help' for more information.");
+    println!("Try 'risifetch --help' for more information.");
     process::exit(1)
 }

@@ -5,10 +5,11 @@ use regex::{Regex, Captures};
 use crate::colors;
 
 fn format_data(key: &str, value: &str) -> String {
-    format!("{color}▪{bold} {key:7}{reset} {value}",
+    format!("{color1}▪{bold} {key:7}{reset} {color2}{value}",
             key = key,
             value = value,
-            color = colors::green,
+            color1 = colors::yellow,
+            color2 = colors::cyan,
             bold = colors::bold,
             reset = colors::reset,
             )
@@ -21,7 +22,7 @@ fn match_regex(search_str: &str, regex: String) -> Option<Captures> {
     re.captures(search_str)
 }
 
-pub fn get_user_host_name(is_christmas: bool) -> Result<(String, String), String> {
+pub fn get_user_host_name() -> Result<(String, String), String> {
     // Username
     let username_env = env::var_os("USER");
     let username: String;
@@ -40,18 +41,16 @@ pub fn get_user_host_name(is_christmas: bool) -> Result<(String, String), String
 
     // Combine username and hostname into a formatted string
     let main_color: &str;
-
-    if is_christmas {
-        main_color = colors::red;
-    } else {
-        main_color = colors::green;
-    }
+    let second_color: &str;
+    main_color = colors::yellow;
+    second_color = colors::cyan;
 
     let user_host_name = format!("{color}{bold}{user}{reset}
-                                 {bold}@{color}{host}{reset}",
+                                 {bold}{color2}@{reset}{bold}{color}{host}{reset}",
                                  user = username,
                                  host = hostname,
                                  color = main_color,
+                                 color2 = second_color,
                                  bold = colors::bold,
                                  reset = colors::reset,
                                  ).replace(" ", "").replace("\n", "");
@@ -62,14 +61,10 @@ pub fn get_user_host_name(is_christmas: bool) -> Result<(String, String), String
     let user_host_name_len = username.len() + 1 + hostname.len();
     let mut separator = String::new();
 
-    if is_christmas {
-        separator += colors::reset;
-    } else {
-        separator += colors::yellow;
-    }
+    separator += colors::cyan;
 
     for _i in 0..(user_host_name_len) {
-        separator += "━";
+        separator += "-";
     }
     separator += colors::reset;
 
@@ -124,12 +119,13 @@ pub fn get_distro_name() -> Result<String, String> {
 
     let re_os = match_regex(&buffer,
                             r#"(?x)
-                            PRETTY_NAME=
+                            NAME=
                             "?   # Quotes if description is multiple words
                             (?P<distro_name>[^\n"]+)
                             "?   # Ditto
                             \n
-                            "#.to_string());
+                            "#.to_string()
+    );
 
     if let Some(..) = re_os {
         let re_os = re_os.unwrap();
