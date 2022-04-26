@@ -18,20 +18,20 @@ fn main() {
             {cyan}     RRRRRRRRRRRRRRRR    {yellow}°o@@@@@@°       {reset}
             {cyan}     RRRRRRRRRRRRRRRRR. {yellow}O@@@@@@@@#       {reset}
             {cyan}     RRRR         {cyan}RRRR {yellow}*@@@@@@@@@#       {reset}
-            {cyan}     RRRR       {yellow}.** {cyan}RRR {yellow}*@@@@@@@@@#      {reset}
+            {cyan}     RRRR       {yellow}.** {cyan}RRR {yellow}*@@@@@@@@@       {reset}
             {cyan}     RRRR    {yellow}.*@@@@° {cyan}RRR {yellow}@@@@@@@@@@      {reset}
             {cyan}     RRRR {yellow}°o@@@@@@@ {cyan}RRR {yellow}*@@@@@@@@@@      {reset}
             {cyan}     RRRR {yellow}#@@@@@@@ {cyan}RRR {yellow}*.@@@@@@@@@@.     {reset}
             {yellow}  *@ {cyan}RRRRRRRRRRRRRRRR {yellow}*@@@@@@@@@@@@@     {reset}
             {yellow}*o@@ {cyan}RRRRRRRRRRRRRRRR {yellow}.#@@@@@@@@@@@@@.   {reset}
-            {yellow} #@@ {cyan}RRRR {yellow}@@@@@  {cyan}RRRR {yellow}*@@@@@@@@@@@@@@o   {reset}
+            {yellow} #@@ {cyan}RRRR {yellow}@@@@@@ {cyan}RRRR {yellow}*@@@@@@@@@@@@@@o   {reset}
             {yellow}   @ {cyan}RRRR {yellow}@@@@@@@@ {cyan}RRRR {yellow}#@@@@@@@@@@@@@   {reset}
-            {cyan}     RRRR {yellow}o#@@@@@@@ {cyan}RRRR {yellow}O@@@@@@@@@@@@.  {reset}
-            {cyan}     RRRR      {yellow}<@@@@ {cyan}RRRR {yellow}.o@@@@@@@@@@O  {reset}
-            {cyan}     RRRR            {cyan}RRRR {yellow}°oO@@@@@@@@@@  {reset}
-            {cyan}     ^^^^            {cyan}^^^^    {yellow}.°*O#@@@@@@ {reset}
-            {yellow}                                  .@@@@@.{reset}
-            {yellow}                                      ***{reset}
+            {cyan}     RRRR {yellow}o#@@@@@@@ {cyan}RRRR {yellow}O@@@@@@@@@@@@.   {reset}
+            {cyan}     RRRR      {yellow}<@@@@ {cyan}RRRR {yellow}.o@@@@@@@@@@O   {reset}
+            {cyan}     RRRR            {cyan}RRRR {yellow}°oO@@@@@@@@@@   {reset}
+            {cyan}     ^^^^            {cyan}^^^^    {yellow}.°*O#@@@@@@   {reset}
+            {yellow}                                  .@@@@@.   {reset}
+            {yellow}                                      ***   {reset}
         ",
         cyan = colors::cyan,
         yellow = colors::yellow,
@@ -64,7 +64,6 @@ fn main() {
     let stat = systemstat::System::new();
 
     let mut data_list: Vec<String> = Vec::new();
-    data_list.push(String::from(""));
     data_list.push(String::from(""));
 
     if let Ok(value) = fields::get_user_host_name() {
@@ -107,7 +106,9 @@ fn main() {
         data_list.push(fields::format_battery(value));
     };
 
+    println!();
     print_left_to_right(ascii_tree, data_list);
+    println!();
 }
 
 // Print two vectors of strings side to side
@@ -120,7 +121,7 @@ fn print_left_to_right(left: Vec<String>, right: Vec<String>) {
         if i < left_len {
             print!(" {}", left[i]);
         }
-        if i < right_len{
+        if i < right_len {
             print!(" {}", right[i]);
         }
         println!()
