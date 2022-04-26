@@ -13,7 +13,7 @@ fn main() {
 
     ascii_tree = format!(
 
-        "   {yellow}                               .v        {reset}
+        "   {yellow}                               .o        {reset}
             {yellow}                             °O@@@       {reset}
             {cyan}     RRRRRRRRRRRRRRRR    {yellow}°o@@@@@@°       {reset}
             {cyan}     RRRRRRRRRRRRRRRRR. {yellow}O@@@@@@@@#       {reset}
