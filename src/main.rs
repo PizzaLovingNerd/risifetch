@@ -65,6 +65,7 @@ fn main() {
 
     let mut data_list: Vec<String> = Vec::new();
     data_list.push(String::from(""));
+    data_list.push(String::from(""));
 
     if let Ok(value) = fields::get_user_host_name() {
             data_list.push(value.0);
