@@ -1,6 +1,4 @@
-# 🌲 `risifetch`
-
-<img src="https://img.shields.io/github/v/release/angelofallars/treefetch?display_name=tag&color=1A90D2"> <img src="https://img.shields.io/github/stars/angelofallars/treefetch?label=stars&color=C3B640"> <img src="https://img.shields.io/github/issues/angelofallars/treefetch?color=87599A"> <img src="https://img.shields.io/github/downloads/angelofallars/treefetch/total?label=downloads&logo=github&color=6EA340"> 
+# `risifetch`
 
 A comfy and fast system fetch tool made in Rust. Tested to be much faster than neofetch and pfetch.
 (Forked from treefetch for risiOS)
