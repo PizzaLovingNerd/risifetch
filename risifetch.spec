@@ -28,5 +28,5 @@ cp target/debug/risifetch %{buildroot}%{_bindir}
 %{_bindir}/risifetch
 
 %changelog
-* Tue Apr 27 2022 PizzaLovingNerd
+* Wed Apr 27 2022 PizzaLovingNerd
 - First spec file
