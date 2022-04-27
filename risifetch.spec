@@ -7,7 +7,6 @@ License:        GPL v3
 URL:            https://github.com/risiOS/risifetch
 Source0:        https://github.com/risiOS/risifetch/archive/refs/heads/main.tar.gz
 
-BuildArch:	noarch
 BuildRequires:	rust
 BuildRequires:	cargo
 
