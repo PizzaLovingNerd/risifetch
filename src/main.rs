@@ -157,6 +157,7 @@ fn help_message() {
     println!();
     println!("OPTIONS");
     println!("  -h, --help     Display this help message");
+    println!("  -k, --kernel-name     Display the kernel name");
     println!();
     println!("risifetch {}", version);
     println!("Report bugs to https://github.com/risiOS/risifetch/issues");
